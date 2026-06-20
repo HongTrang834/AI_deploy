@@ -11,8 +11,13 @@ app = Flask(__name__)
 CORS(app)
 
 # 1. Khởi tạo Groq API qua Environment Variable (Biến môi trường) để bảo mật
-# Không nên hardcode API Key trực tiếp khi đẩy lên server công cộng
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "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")
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+
 client = Groq(api_key=GROQ_API_KEY)
 
 # 2. Thay đổi đường dẫn CSV thành đường dẫn tương đối trong cùng thư mục project
